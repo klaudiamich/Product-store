@@ -1,0 +1,13 @@
+h1 {
+  border-bottom: none;
+}
+
+.inputText {
+  font-style: italic;
+  text-align: center;
+}
+
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  font-size: 13px;
+}
