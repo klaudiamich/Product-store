@@ -1,5 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { products, Product } from "./products-json";
+import { Product } from "./products-model";
+
+import { ProductService } from "./product.service";
+import { Observable } from "rxjs";
+import { Entry } from "contentful";
 
 @Component({
   selector: "app-product-list",
@@ -7,34 +11,36 @@ import { products, Product } from "./products-json";
   styleUrls: ["./product-list.component.scss"]
 })
 export class ProductListComponent implements OnInit {
-  constructor() {}
+  constructor(private productService: ProductService) {}
 
   pageTitle = "Product List";
 
   public products: Product[];
+  // public products$: Observable<Product[]>;
 
-  // products: any[] = [
-  //   {
-  //     productId: 2,
-  //     productName: 'Garden Cart',
-  //     productCode: 'GDN-0023',
-  //     releaseDate: 'March 18, 2019',
-  //     description: '15 gallon capacity rolling garden cart',
-  //     price: 32.99,
-  //     starRating: 4.2,
-  //     imageurl: '../../assets/yard-carts.png'
-  //   },
-  //   {
-  //     productId: 5,
-  //     productName: 'Hammer',
-  //     productCode: 'TBX-0048',
-  //     releaseDate: 'May 21, 2019',
-  //     description: 'Curved claw steel hammer',
-  //     price: 8.9,
-  //     starRating: 4.8,
-  //     imageurl: '../../assets/hammer.png'
-  //   }
-  // ];
+  ngOnInit() {
+    // this.products$ = this.productService.getProducts();
+    this.productService
+      .getProducts()
+      .then(
+        response =>
+          (this.products = response.items.map(x => this.mapProducts(x)))
+      )
+      .catch(console.error);
+  }
 
-  ngOnInit() {}
+  private mapProducts(entry: Entry<any>): Product {
+    const p: Product = {
+      description: entry.fields.description,
+      starRating: entry.fields.starRating,
+      productCode: entry.fields.productCode,
+      price: entry.fields.price,
+      productId: entry.fields.productId,
+      productName: entry.fields.productName,
+      releaseDate: entry.fields.releaseDate,
+      imageurl: entry.fields.image2 ? entry.fields.image2.fields.file.url : ""
+    };
+    console.log("abc", entry.fields);
+    return p;
+  }
 }

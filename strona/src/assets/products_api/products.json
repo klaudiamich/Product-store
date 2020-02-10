@@ -1,6 +1,6 @@
 [
   {
-    "productId": 2,
+    "productId": 1,
     "productName": "Garden Cart",
     "productCode": "GDN-0023",
     "releaseDate": "March 18, 2019",
@@ -16,6 +16,16 @@
     "releaseDate": "May 21, 2019",
     "description": "Curved claw steel hammer",
     "price": 8.9,
+    "starRating": 4.8,
+    "imageurl": "../../assets/hammer.png"
+  },
+  {
+    "productId": 6,
+    "productName": "xxx",
+    "productCode": "AAA-0049",
+    "releaseDate": "June 21, 2018",
+    "description": "bbb",
+    "price": 18.9,
     "starRating": 4.8,
     "imageurl": "../../assets/hammer.png"
   }

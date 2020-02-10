@@ -16,7 +16,7 @@
   <div class="col md-6"></div>
 </div>
 <div class="table-responsive">
-  <table class="table" *ngIf="products && products.length">
+  <table class="table" *ngIf="products?.length > 0">
     <thead>
       <tr>
         <th>
@@ -33,7 +33,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let product of products">
-        <td></td>
+        <td><img class="product-img" [src]="product.imageurl" /></td>
         <td>{{ product.productName }}</td>
         <td>{{ product.productCode }}</td>
         <td>{{ product.releaseDate }}</td>
