@@ -17,6 +17,8 @@ export class ProductListComponent implements OnInit {
 
   public products: Product[];
   // public products$: Observable<Product[]>;
+  showImage = false;
+  filterbox = "";
 
   ngOnInit() {
     // this.products$ = this.productService.getProducts();
@@ -42,5 +44,9 @@ export class ProductListComponent implements OnInit {
     };
     console.log("abc", entry.fields);
     return p;
+  }
+
+  toggleImage(): void {
+    this.showImage = !this.showImage;
   }
 }

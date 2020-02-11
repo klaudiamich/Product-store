@@ -2,12 +2,15 @@
   <h1 class="card-header">{{ pageTitle }}</h1>
   <div class="card-body">
     <div class="row">
-      <div class="col-md-2"><span>Filter by: </span></div>
+      <div class="col-md-2">
+        <span>Filter by: {{ filterbox }} </span>
+      </div>
       <div class="col-md-4">
         <input
           type="text"
           placeholder="Search for product..."
           class="inputText"
+          [(ngModel)]="filterbox"
         />
       </div>
     </div>
@@ -20,8 +23,8 @@
     <thead>
       <tr>
         <th>
-          <button class="btn btn-primary">
-            Show image
+          <button class="btn btn-primary" (click)="toggleImage()">
+            {{ showImage ? "Hide" : "Show" }} image
           </button>
         </th>
         <th>Product</th>
@@ -33,11 +36,13 @@
     </thead>
     <tbody>
       <tr *ngFor="let product of products">
-        <td><img class="product-img" [src]="product.imageurl" /></td>
+        <td>
+          <img *ngIf="showImage" class="product-img" [src]="product.imageurl" />
+        </td>
         <td>{{ product.productName }}</td>
-        <td>{{ product.productCode }}</td>
+        <td>{{ product.productCode | lowercase }}</td>
         <td>{{ product.releaseDate }}</td>
-        <td>{{ product.price }}</td>
+        <td>{{ product.price | currency: "EUR" }}</td>
         <td>{{ product.starRating }}</td>
       </tr>
     </tbody>
